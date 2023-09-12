@@ -1,0 +1,33 @@
+name: JSON File Example
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create JSON File
+        id: create-json
+        run: |
+          # Create a JSON file with some data
+          echo '{"name": "John", "age": 30}' > data.json
+          echo "JSON file created with data."
+
+      - name: Read JSON File
+        id: read-json
+        run: |
+          # Read the JSON file and extract a specific word (e.g., "John")
+          json_data=$(cat data.json)
+          name=$(echo "$json_data" | jq -r '.name')
+          echo "Name from JSON: $name"
+
+      - name: Use Name in Next Step
+        run: |
+          # Use the extracted name from the JSON file in the next step
+          echo "Using name ($name) from JSON in this step."
