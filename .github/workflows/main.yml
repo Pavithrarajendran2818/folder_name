@@ -30,4 +30,4 @@ jobs:
       - name: Use Name in Next Step
         run: |
           # Use the extracted name from the JSON file in the next step
-          echo "Using name ($name) from JSON in this step."
+          echo "Using name $name from JSON in this step."
